@@ -50,10 +50,22 @@ createBoard()
 const allsquare=document.querySelectorAll(".square")
 
 allsquare.forEach((item)=>{
-    item.addEventListener('dragstart',dragst)
+    item.addEventListener('dragstart',dragStart)
+    item.addEventListener('dragover',dragOver)
+    item.addEventListener('drop',dragDrop)
 
 })
-function dragst(e){
-console.log(e.target.parentNode.getAttribute("square-id"))
+let startposId;
+let draggedEle;
 
+function dragStart(e){
+startposId=e.target.parentNode.getAttribute("square-id")
+draggedEle=e.target
+}
+function dragOver(e){
+    e.preventDefault
+console.log(e.target)
+}
+function dragDrop(e){
+    console.log(e)
 }
