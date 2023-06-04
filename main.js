@@ -1,7 +1,8 @@
 const gameBoard=document.querySelector("#gameboard");
 const player=document.querySelector("#player");
 const infoDisplay=document.querySelector("info-display")
- 
+ let playergo="black"
+ player.textContent=playergo
 const startPieces=[
     rook ,knight,bishop,queen,king,bishop,knight,rook,
     pawn,pawn,pawn,pawn,pawn,pawn,pawn,pawn,
@@ -61,11 +62,35 @@ let draggedEle;
 function dragStart(e){
 startposId=e.target.parentNode.getAttribute("square-id")
 draggedEle=e.target
+console.log(draggedEle)
 }
 function dragOver(e){
-    e.preventDefault
-console.log(e.target)
+   e.preventDefault()
+
 }
 function dragDrop(e){
-    console.log(e)
+    e.stopPropagation(); 
+    changePlayer();
+    const taken=e.target.classList.contains('piece')
+    console.log(e.target)
+    
+    
+    e.target.parentNode.append(draggedEle)
+    if(taken){
+        e.target.remove();}
+        else{
+            e.target.append(draggedEle)
+        }
+   
+}
+function changePlayer(){
+    if(playergo==="black"){
+        playergo="white"
+        player.textContent='White'
+    }
+    else{
+        playergo="black"
+        player.textContent='black'
+        
+    }
 }
