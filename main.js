@@ -62,18 +62,17 @@ let draggedEle;
 function dragStart(e){
 startposId=e.target.parentNode.getAttribute("square-id")
 draggedEle=e.target
-console.log(draggedEle)
 }
 function dragOver(e){
    e.preventDefault()
 
 }
 function dragDrop(e){
-    e.stopPropagation(); 
+    // e.stopPropagation(); 
     changePlayer();
     const taken=e.target.classList.contains('piece')
-    console.log(e.target)
-    
+    console.log(e.target,e.target.classList)
+        
     
     e.target.parentNode.append(draggedEle)
     if(taken){
@@ -86,11 +85,27 @@ function dragDrop(e){
 function changePlayer(){
     if(playergo==="black"){
         playergo="white"
-        player.textContent='White'
+        player.textContent='white'
+        revereId()
     }
     else{
         playergo="black"
         player.textContent='black'
-        
+        revertId()
     }
+}
+// reversing ids
+function revereId(){
+    const allsquare=document.querySelectorAll(".square")
+    allsquare.forEach((item,i)=>{
+        item.setAttribute('square-id',(64-1)-i)
+
+    })
+}
+function revertId(){
+    const allsquare=document.querySelectorAll(".square")
+    allsquare.forEach((item,i)=>{
+        item.setAttribute('square-id',i)
+
+    })
 }
